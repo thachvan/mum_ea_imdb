@@ -1,5 +1,7 @@
 package edu.mum.ea.imdb.model;
 
-public class Director extends Person {
+import java.util.List;
 
+public class Director extends Person {
+	private List<Movie> movies;
 }
