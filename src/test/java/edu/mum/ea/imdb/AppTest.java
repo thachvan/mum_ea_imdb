@@ -1,4 +1,4 @@
-package edu.mum.ea.hibernate_extra_credit;
+package edu.mum.ea.imdb;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

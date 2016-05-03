@@ -10,6 +10,8 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import edu.mum.ea.imdb.model.Character;
@@ -30,8 +32,8 @@ public class Movie {
 	@OneToMany(mappedBy = "movie")
 	private Set<Character> characters = new HashSet<Character>();
 
-	@OneToMany
-	@JoinColumn(name = "director_id")
+	@ManyToMany
+	@JoinTable(name = "MOVIES_DIRECTORS", joinColumns = @JoinColumn(name = "director_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
 	private Set<Director> directors = new HashSet<Director>();
 
 	@OneToMany
