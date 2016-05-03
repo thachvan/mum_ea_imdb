@@ -3,6 +3,8 @@ package edu.mum.ea.imdb.model;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,26 +17,33 @@ import edu.mum.ea.imdb.model.Character;
 @Entity
 public class Movie {
 	public enum Genre {
-		ACTION, ADVENTURE, HORROR, ROMANCE, COMEDY
+		ACTION, ADVENTURE, HORROR, ROMANCE, COMEDY, DRAMA
 	};
 
 	private String name;
 	private Genre genre;
 	private double rating;
 	private int year;
+	private byte[] poster;
+	private String summary;
 
 	@OneToMany(mappedBy = "movie")
-	private Set<Character> characters;
+	private Set<Character> characters = new HashSet<Character>();
 
 	@OneToMany
 	@JoinColumn(name = "director_id")
-	private Set<Director> directors;
+	private Set<Director> directors = new HashSet<Director>();
 
 	@OneToMany
 	@JoinColumn(name = "comment_id")
-	private List<Comment> comments;
-	private byte[] poster;
-	private String summary;
+	private List<Comment> comments = new ArrayList<Comment>();
+
+	public Movie() {
+	}
+
+	public Movie(String name) {
+		setName(name);
+	}
 
 	public String getName() {
 		return name;
@@ -86,5 +95,17 @@ public class Movie {
 		for (Director director : directors) {
 			this.directors.add(director);
 		}
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public void addComment(User user, String comment) {
+		comments.add(new Comment(user, comment));
 	}
 }
