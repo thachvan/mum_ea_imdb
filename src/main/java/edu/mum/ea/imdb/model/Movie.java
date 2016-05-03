@@ -9,6 +9,8 @@ public class Movie {
 	private double rating;
 	private int year;
 	private Map<String, Actor> characters;
-	private Director director;
+	private List<Director> directors;
 	private List<Comment> comments;
+	private byte[] poster;
+	private String summary;
 }
