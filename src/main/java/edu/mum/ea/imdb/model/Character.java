@@ -7,8 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "movie_character")
 public class Character {
 	@Id
 	@GeneratedValue
@@ -30,6 +32,7 @@ public class Character {
 	public Character(String name, Actor actor) {
 		this.setName(name);
 		this.setActor(actor);
+		actor.addMovie(movie);
 	}
 
 	public String getName() {

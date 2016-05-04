@@ -1,5 +1,6 @@
 package edu.mum.ea.imdb.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +13,7 @@ public class Comment {
 	@GeneratedValue
 	private int id;
 
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "user_id")
 	private User user;
 

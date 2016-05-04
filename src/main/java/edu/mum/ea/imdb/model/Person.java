@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -23,6 +24,7 @@ public abstract class Person {
 	private String name;
 	private LocalDate dateOfBirth;
 	private String placeOfBirth;
+	@Lob
 	private byte[] picture;
 	
 	@Column(columnDefinition="text")

@@ -8,8 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-
 import edu.mum.ea.imdb.model.Actor;
 import edu.mum.ea.imdb.model.Movie;
 import edu.mum.ea.imdb.model.Movie.Genre;
@@ -106,17 +104,15 @@ public class App {
 			Session session = sessionFatory.getCurrentSession();
 			tx = session.beginTransaction();
 
-			//session.save(taylorKinney);
-			//session.save(jesseSpencer);
-			//session.save(stefanDennis);
-			//session.save(chicagoFire);
-			//session.save(neighbours);
+			session.save(chicagoFire);
+			session.save(neighbours);
 
 			tx.commit();
 		} catch (RuntimeException re) {
 			try {
 				re.printStackTrace();
-				tx.rollback();
+				System.out.println("ROLLLLLLLLLLLLLLL BACCCCCCKKKKKKK");
+				//tx.rollback();
 			} catch (RuntimeException rerb) {
 				rerb.printStackTrace();
 			}

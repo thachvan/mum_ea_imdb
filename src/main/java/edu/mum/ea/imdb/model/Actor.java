@@ -1,22 +1,19 @@
 package edu.mum.ea.imdb.model;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "Actor")
 public class Actor extends Person {
 	@ManyToMany
 	@JoinTable(name = "ACTOR_MOVIE", joinColumns = @JoinColumn(name = "actor_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
-	private Set<Movie> movies;
+	private Set<Movie> movies = new HashSet<Movie>();
 
 	public Actor() {
 	}
