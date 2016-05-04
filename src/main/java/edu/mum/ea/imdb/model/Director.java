@@ -7,7 +7,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Director extends Person {
-	@ManyToMany
+	@ManyToMany(mappedBy = "directors")
 	private List<Movie> movies;
 
 	public Director() {
