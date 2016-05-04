@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
 import edu.mum.ea.imdb.model.Character;
 
 @Entity
@@ -21,6 +22,10 @@ public class Movie {
 	public enum Genre {
 		ACTION, ADVENTURE, HORROR, ROMANCE, COMEDY, DRAMA
 	};
+
+	@Id
+	@GeneratedValue
+	int id;
 
 	private String name;
 	private Genre genre;

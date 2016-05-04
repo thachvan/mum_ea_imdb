@@ -13,8 +13,10 @@ import org.hibernate.service.ServiceRegistry;
 import edu.mum.ea.imdb.model.Actor;
 import edu.mum.ea.imdb.model.Movie;
 import edu.mum.ea.imdb.model.Movie.Genre;
+import edu.mum.ea.imdb.model.Person;
 import edu.mum.ea.imdb.model.User;
 import edu.mum.ea.imdb.model.Character;
+import edu.mum.ea.imdb.model.Comment;
 import edu.mum.ea.imdb.model.Director;
 
 /**
@@ -85,6 +87,15 @@ public class App {
 		// perform saving objects
 
 		Configuration configuration = new Configuration().configure();
+
+		configuration.addAnnotatedClass(Actor.class);
+		configuration.addAnnotatedClass(Character.class);
+		configuration.addAnnotatedClass(Comment.class);
+		configuration.addAnnotatedClass(Director.class);
+		configuration.addAnnotatedClass(Movie.class);
+		configuration.addAnnotatedClass(Person.class);
+		configuration.addAnnotatedClass(User.class);
+
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties());
 		SessionFactory sessionFatory = configuration
@@ -94,10 +105,10 @@ public class App {
 		try {
 			Session session = sessionFatory.getCurrentSession();
 			tx = session.beginTransaction();
-			
+
 			session.save(chicagoFire);
 			session.save(neighbours);
-			
+
 			tx.commit();
 		} catch (RuntimeException re) {
 			try {

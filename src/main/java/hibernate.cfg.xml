@@ -21,5 +21,22 @@
         <property name="hibernate.current_session_context_class">
         	thread
         </property>
+        <property name="show_sql">
+        	true
+        </property>
+        <property name="hibernate.id.new_generator_mappings">
+        	false
+        </property>
+        <property name="hibernate.hbm2ddl.auto">
+        	update
+        </property>
+        
+        <mapping class="edu.mum.ea.imdb.model.Actor" />
+        <mapping class="edu.mum.ea.imdb.model.Character" />
+        <mapping class="edu.mum.ea.imdb.model.Comment" />
+        <mapping class="edu.mum.ea.imdb.model.Director" />
+        <mapping class="edu.mum.ea.imdb.model.Movie" />
+        <mapping class="edu.mum.ea.imdb.model.Person" />
+        <mapping class="edu.mum.ea.imdb.model.User" />
 	</session-factory> 
 </hibernate-configuration>

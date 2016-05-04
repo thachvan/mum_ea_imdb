@@ -12,10 +12,6 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Actor extends Person {
-	@Id
-	@GeneratedValue
-	private int id;
-
 	@ManyToMany
 	@JoinTable(name = "ACTOR_MOVIE", joinColumns = @JoinColumn(name = "actor_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
 	private Set<Movie> movies;
