@@ -3,6 +3,13 @@ package edu.mum.ea.imdb;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 import edu.mum.ea.imdb.model.Actor;
 import edu.mum.ea.imdb.model.Movie;
 import edu.mum.ea.imdb.model.Movie.Genre;
@@ -74,5 +81,35 @@ public class App {
 				new Character("Billy Kennedy", jesseSpencer));
 		neighbours.addComment(new User("tracy-piedmont"),
 				"OK. I read some of the lesser reviews but I totally disagree. I love this show and after 1 episode I was hooked");
+
+		// perform saving objects
+
+		Configuration configuration = new Configuration().configure();
+		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties());
+		SessionFactory sessionFatory = configuration
+				.buildSessionFactory(builder.build());
+
+		Transaction tx = null;
+		try {
+			Session session = sessionFatory.getCurrentSession();
+			tx = session.beginTransaction();
+			
+			session.save(chicagoFire);
+			session.save(neighbours);
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			try {
+				re.printStackTrace();
+				tx.rollback();
+			} catch (RuntimeException rerb) {
+				rerb.printStackTrace();
+			}
+
+			throw re;
+		}
+
+		sessionFatory.close();
 	}
 }
