@@ -2,19 +2,13 @@ package edu.mum.ea.imdb;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import edu.mum.ea.imdb.model.Actor;
 import edu.mum.ea.imdb.model.Movie;
 import edu.mum.ea.imdb.model.Movie.Genre;
-import edu.mum.ea.imdb.model.Person;
 import edu.mum.ea.imdb.model.User;
 import edu.mum.ea.imdb.model.Character;
-import edu.mum.ea.imdb.model.Comment;
 import edu.mum.ea.imdb.model.Director;
 
 public class App {
@@ -77,44 +71,27 @@ public class App {
 		neighbours.addComment(new User("tracy-piedmont"),
 				"OK. I read some of the lesser reviews but I totally disagree. I love this show and after 1 episode I was hooked");
 
+		DAO dao = new DAO();
+		
 		// perform saving objects
-
-		Configuration configuration = new Configuration().configure();
-
-		configuration.addAnnotatedClass(Actor.class);
-		configuration.addAnnotatedClass(Character.class);
-		configuration.addAnnotatedClass(Comment.class);
-		configuration.addAnnotatedClass(Director.class);
-		configuration.addAnnotatedClass(Movie.class);
-		configuration.addAnnotatedClass(Person.class);
-		configuration.addAnnotatedClass(User.class);
-
-		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-				.applySettings(configuration.getProperties());
-		SessionFactory sessionFatory = configuration
-				.buildSessionFactory(builder.build());
-
-		Transaction tx = null;
-		try {
-			Session session = sessionFatory.getCurrentSession();
-			tx = session.beginTransaction();
-
-			session.save(chicagoFire);
-			session.save(neighbours);
-
-			tx.commit();
-		} catch (RuntimeException re) {
-			try {
-				re.printStackTrace();
-				System.out.println("ROLLLLLLLLLLLLLLL BACCCCCCKKKKKKK");
-				// tx.rollback();
-			} catch (RuntimeException rerb) {
-				rerb.printStackTrace();
-			}
-
-			throw re;
-		}
-
-		sessionFatory.close();
+		dao.addMovies(chicagoFire, neighbours);
+		// search movie by name using Lambda
+		List<Movie> moviesByName = dao.searchMovies(movie -> movie.getName().equals("Chicago Fire"));
+		// search movie by name using function
+		moviesByName = dao.searchMovieByName("Chicago Fire");
+		// search movie by genre
+		List<Movie> moviesByGenre = dao.searchMovieByGenre(Genre.DRAMA);
+		// search movie by rating
+		List<Movie> moviesByRating = dao.searchMovieByRating(5.2);
+		// search movie by year
+		List<Movie> moviesByYear = dao.searchMovieByYear(2016);
+		// search movie by actor
+		List<Movie> moviesByActor = dao.searchMovieByActor("Jesse Spencer");
+		// search movie by character
+		List<Movie> moviesByCharacter = dao.searchMovieByCharacter("Billy Kennedy");
+		// search movie by director
+		List<Movie> moviesByDirector = dao.searchMovieByDirector("Sanford Bookstaver");
+		
+		dao.close();
 	}
 }
