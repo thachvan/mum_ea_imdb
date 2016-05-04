@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,14 +35,14 @@ public class Movie {
 	private byte[] poster;
 	private String summary;
 
-	@OneToMany(mappedBy = "movie")
+	@OneToMany(mappedBy = "movie", cascade = { CascadeType.ALL })
 	private Set<Character> characters = new HashSet<Character>();
 
-	@ManyToMany
+	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "MOVIES_DIRECTORS", joinColumns = @JoinColumn(name = "director_id"), inverseJoinColumns = @JoinColumn(name = "movie_id"))
 	private Set<Director> directors = new HashSet<Director>();
 
-	@OneToMany
+	@OneToMany(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "comment_id")
 	private List<Comment> comments = new ArrayList<Comment>();
 

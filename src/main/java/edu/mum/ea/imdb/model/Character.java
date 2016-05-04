@@ -1,5 +1,6 @@
 package edu.mum.ea.imdb.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ public class Character {
 	@JoinColumn(name = "movie_id")
 	private Movie movie;
 
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "actor_id")
 	private Actor actor;
 

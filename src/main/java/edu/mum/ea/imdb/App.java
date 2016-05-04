@@ -106,8 +106,11 @@ public class App {
 			Session session = sessionFatory.getCurrentSession();
 			tx = session.beginTransaction();
 
-			session.save(chicagoFire);
-			session.save(neighbours);
+			//session.save(taylorKinney);
+			//session.save(jesseSpencer);
+			//session.save(stefanDennis);
+			//session.save(chicagoFire);
+			//session.save(neighbours);
 
 			tx.commit();
 		} catch (RuntimeException re) {

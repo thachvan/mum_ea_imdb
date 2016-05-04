@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +23,10 @@ public abstract class Person {
 	private String name;
 	private LocalDate dateOfBirth;
 	private String placeOfBirth;
-	private String biography;
 	private byte[] picture;
+	
+	@Column(columnDefinition="text")
+	private String biography;
 
 	public String getName() {
 		return name;

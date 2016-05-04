@@ -28,7 +28,7 @@
         	false
         </property>
         <property name="hibernate.hbm2ddl.auto">
-        	update
+        	create-drop
         </property>
         
         <mapping class="edu.mum.ea.imdb.model.Actor" />
