@@ -32,7 +32,6 @@ public class Character {
 	public Character(String name, Actor actor) {
 		this.setName(name);
 		this.setActor(actor);
-		actor.addMovie(movie);
 	}
 
 	public String getName() {

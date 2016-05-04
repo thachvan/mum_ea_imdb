@@ -100,6 +100,7 @@ public class Movie {
 
 	public void addCharacter(Character... characters) {
 		for (Character character : characters) {
+			character.setMovie(this);
 			this.characters.add(character);
 		}
 	}

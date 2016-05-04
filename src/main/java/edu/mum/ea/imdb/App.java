@@ -17,14 +17,9 @@ import edu.mum.ea.imdb.model.Character;
 import edu.mum.ea.imdb.model.Comment;
 import edu.mum.ea.imdb.model.Director;
 
-/**
- * Hello world!
- *
- */
 public class App {
 	public static void main(String[] args) throws IOException {
 		initDB();
-		System.out.println("Hello World!");
 	}
 
 	public static void initDB() throws IOException {
@@ -112,7 +107,7 @@ public class App {
 			try {
 				re.printStackTrace();
 				System.out.println("ROLLLLLLLLLLLLLLL BACCCCCCKKKKKKK");
-				//tx.rollback();
+				// tx.rollback();
 			} catch (RuntimeException rerb) {
 				rerb.printStackTrace();
 			}
