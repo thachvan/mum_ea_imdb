@@ -2,6 +2,7 @@ package edu.mum.ea.imdb;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.mum.ea.imdb.model.Actor;
@@ -72,26 +73,47 @@ public class App {
 				"OK. I read some of the lesser reviews but I totally disagree. I love this show and after 1 episode I was hooked");
 
 		DAO dao = new DAO();
-		
+
 		// perform saving objects
 		dao.addMovies(chicagoFire, neighbours);
 		// search movie by name using Lambda
-		List<Movie> moviesByName = dao.searchMovies(movie -> movie.getName().equals("Chicago Fire"));
+		List<Movie> moviesByName = dao
+				.searchMovies(movie -> movie.getName().equals("Chicago Fire"));
+		printList("Name = Chicago Fire", moviesByName);
 		// search movie by name using function
-		moviesByName = dao.searchMovieByName("Chicago Fire");
+		moviesByName = dao.searchMovieByName("Neighbours");
+		printList("Name = Neighbours", moviesByName);
 		// search movie by genre
-		List<Movie> moviesByGenre = dao.searchMovieByGenre(Genre.DRAMA);
+		List<Movie> moviesByGenre = dao.searchMovieByGenre(Genre.ACTION);
+		printList("Genre = Action", moviesByGenre);
 		// search movie by rating
 		List<Movie> moviesByRating = dao.searchMovieByRating(5.2);
+		printList("Rating = 5.2", moviesByRating);
 		// search movie by year
 		List<Movie> moviesByYear = dao.searchMovieByYear(2016);
+		printList("Year = 2016", moviesByYear);
 		// search movie by actor
 		List<Movie> moviesByActor = dao.searchMovieByActor("Jesse Spencer");
+		printList("Actor = Jesse Spencer", moviesByActor);
 		// search movie by character
-		List<Movie> moviesByCharacter = dao.searchMovieByCharacter("Billy Kennedy");
+		List<Movie> moviesByCharacter = dao
+				.searchMovieByCharacter("Billy Kennedy");
+		printList("Character = Billy Kennedy", moviesByCharacter);
 		// search movie by director
-		List<Movie> moviesByDirector = dao.searchMovieByDirector("Sanford Bookstaver");
-		
+		List<Movie> moviesByDirector = dao
+				.searchMovieByDirector("Sanford Bookstaver");
+		printList("Director = Sanford Bookstaver", moviesByDirector);
+
 		dao.close();
+	}
+
+	public static void printList(String message,
+			@SuppressWarnings("rawtypes") List list) {
+		System.out.println(message);
+		String formatedString = Arrays.toString(list.toArray())
+			    .replace("[", "")  //remove the right bracket
+			    .replace("]", "")  //remove the left bracket
+			    .trim();
+		System.out.println(formatedString);
 	}
 }

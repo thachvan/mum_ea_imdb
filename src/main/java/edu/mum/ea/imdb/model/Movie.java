@@ -11,8 +11,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,10 +34,10 @@ public class Movie {
 	private Genre genre;
 	private double rating;
 	private int year;
-	
+
 	@Lob
 	private byte[] poster;
-	@Column(columnDefinition="text")
+	@Column(columnDefinition = "text")
 	private String summary;
 
 	@OneToMany(mappedBy = "movie", cascade = { CascadeType.ALL })
@@ -123,5 +121,17 @@ public class Movie {
 
 	public void addComment(User user, String comment) {
 		comments.add(new Comment(user, comment));
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+
+		result.append("* Movie '").append(name).append("': ");
+		result.append("Genre is ").append(genre).append(", ");
+		result.append("Rating is ").append(rating).append(", ");
+		result.append("Year is ").append(year).append("\r\n");
+
+		return result.toString();
 	}
 }
